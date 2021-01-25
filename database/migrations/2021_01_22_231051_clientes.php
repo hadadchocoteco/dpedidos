@@ -18,6 +18,7 @@ class Clientes extends Migration
             $table->string('razonSocial',200)->nullable();
             $table->string('password',100)->nullable();
             $table->decimal('iva',18,3)->nullable();
+            $table->integer('noListaPrecio')->nullable();
             $table->decimal('porcendescto',18,3)->nullable();
             $table->string('mailmensajes',200)->nullable();
             $table->integer('idEmpresa')->nullable();

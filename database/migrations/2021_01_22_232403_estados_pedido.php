@@ -26,6 +26,6 @@ class EstadosPedido extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('dtestadospedido');
     }
 }

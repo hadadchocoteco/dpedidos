@@ -32,6 +32,6 @@ class DetallePedido extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('dtdetallepedido');
     }
 }

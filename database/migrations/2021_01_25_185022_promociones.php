@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Empresa extends Migration
+class Promociones extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class Empresa extends Migration
      */
     public function up()
     {
-        Schema::create('dtempresa', function (Blueprint $table) {
-            $table->decimal('emptc',18,4)->nullable();
-            $table->integer('idEmpresa')->nullable();
-            $table->integer('idSucursal')->nullable();
+        Schema::create('dtpromos', function (Blueprint $table) {
+            $table->bigIncrements('idPromo');
+            $table->string('promo',50);
+            $table->string('clave',50);
         });
     }
 
@@ -27,6 +27,6 @@ class Empresa extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dtempresa');
+        Schema::dropIfExists('dtpromos');
     }
 }

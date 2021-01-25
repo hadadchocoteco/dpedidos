@@ -26,7 +26,7 @@ class Articulos extends Migration
             $table->integer('depto')->nullable();
             $table->integer('familia')->nullable();
             $table->integer('marca')->nullable();
-            $table->integer('idPromo')->nullable();
+            $table->integer('idPromocion')->nullable();
             $table->integer('idEmpresa')->nullable();
             $table->integer('idSucursal')->nullable();
         });

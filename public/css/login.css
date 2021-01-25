@@ -1,0 +1,38 @@
+#pie-desarrollador p {color: white;}
+#contenedor-centrado input[type=text]{border: 1px solid gray;}
+
+@media screen and (max-width: 420px) {
+	main{display: block;}
+
+	#contenedor-centrado{padding: 100px 1% 0 1%;}
+	.contenido-centrado {
+		padding: 10% 3% 10% 3%;
+	}
+}
+
+@media screen and (min-width: 420px) {
+	main{display: block;}
+
+	#contenedor-centrado{padding: 100px 1% 0 1%;}
+	.contenido-centrado {
+		padding: 10% 25% 10% 25%;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	main{display: block;}
+
+	#contenedor-centrado{padding: 100px 18% 0 18%;}
+	.contenido-centrado {
+		padding: 10% 25% 0 25%;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	main{display: block;}
+
+	#contenedor-centrado{padding: 100px 25% 0 25%;}
+    .contenido-centrado {
+    	padding: 10% 25% 10% 25%;
+    }
+}

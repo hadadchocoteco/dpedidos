@@ -40,6 +40,6 @@ class ArticulosPedidoTemp extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('dtarticulospedidotemp');
     }
 }

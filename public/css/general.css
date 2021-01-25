@@ -1,0 +1,80 @@
+a, p, h1, h2, h3, h4, h5, h6, span, label, i, b, textarea, div, ul, ol, li {
+	font-family: Quick;
+}
+
+a{
+	text-decoration: none;
+}
+
+.fondo-delmar-1{
+	background-color: #1F9040;
+}
+
+.fondo-delmar-2{
+	background-color: #82C783;
+}
+
+.fondo-delmar-3{
+	background-color: #196826;
+}
+
+.forma-redonda{
+	border-radius: 50px;
+}
+
+.mostrar {
+	display: block;
+}
+
+.ocultar {
+	display: none;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.notificacion{
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	width: 250px;
+}
+
+@media screen and (max-width: 420px) {
+
+}
+
+@media screen and (min-width: 420px) {
+
+}
+
+@media screen and (min-width: 1024px) {
+	.contenido{
+		width: 100%;
+		padding: 10px 20%;
+	}
+
+	.banner{
+		width: 100%;
+	}
+
+	.icono{
+		font-size: 20px;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.contenido{
+		width: 100%;
+		padding: 10px 25%;
+	}
+
+	.banner{
+		width: 100%;
+	}
+
+	.icono{
+		font-size: 20px;
+	}
+}

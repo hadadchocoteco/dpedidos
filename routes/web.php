@@ -5,6 +5,7 @@ use App\Http\Controllers\InicioController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ArticulosController;
+use App\Http\Controllers\PresentacionesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,11 @@ Route::get('clientes/detalle/{cliente}', [ClientesController::class, 'show']);
 /* Pedido */
 Route::get('v/pedidos', [PedidosController::class, 'index']);
 Route::get('pedidos/crear', [PedidosController::class, 'create']);
+Route::get('pedidos/consulta/temporal', [PedidosController::class, 'cargar_pedido_temporal']);
+Route::post('pedidos/guardar/temporal', [PedidosController::class, 'guardar_pedido_temporal']);
+Route::get('pedidos/guardar', [PedidosController::class, 'store']);
 /* Artículos */
 Route::get('articulos/lista', [ArticulosController::class, 'articulos']);
+Route::get('articulos/consulta/precio', [ArticulosController::class, 'articulos_precio']);
+/* Presentaciones */
+Route::get('presentaciones/lista', [PresentacionesController::class, 'presentaciones']);

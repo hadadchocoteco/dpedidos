@@ -19,12 +19,38 @@ class ArticulosController extends Controller
 
     public function articulos(){
         $articulo = $_GET['articulo'];
-        $datos['articulos'] = DB::raw("select * from `dtArticulos`
-        INNER join `dtPresentacion` on `dtPresentacion`.`claveArticulo` = `dtArticulos`.`claveArticulo` AND `dtPresentacion`.`clavePresentacion` = `dtArticulos`.`presentacionPrincipal`
-        INNER join `dtPrecio` on `dtPrecio`.`clavePresentacion` = `dtPresentacion`.`clavePresentacion` AND `dtPrecio`.`noLista` = 1
-        where `dtArticulos`.`descripcion` like '%$articulo%' and `dtArticulos`.`estado` = 'A'");
+
+        $datos['articulos'] = DB::select("SELECT
+            dtArticulos.claveArticulo,
+            dtArticulos.descripcion,
+            dtArticulos.existencia,
+            dtArticulos.moneda,
+            dtArticulos.iva,
+            dtArticulos.iepstipo,
+            dtArticulos.iepsmonto,
+            dtPresentacion.clavePresentacion,
+            dtPresentacion.descripcion nompresentacion,
+            CAST(dtPrecio.precio AS decimal(18,2)) precio,
+            1 cant
+            FROM dtArticulos
+            INNER JOIN dtPresentacion ON dtPresentacion.claveArticulo = dtArticulos.claveArticulo AND dtPresentacion.clavePresentacion = dtArticulos.presentacionPrincipal
+            INNER JOIN dtPrecio ON dtPrecio.clavePresentacion = dtPresentacion.clavePresentacion AND dtPrecio.noLista = 1
+            WHERE dtArticulos.descripcion LIKE '%$articulo%' AND dtArticulos.estado = 'A'");
+
+        $datos['presentaciones'] = DB::table('dtPresentacion')->get();
 
         return view('articulos.lista',$datos);
+    }
+
+    public function articulos_precio(){
+        $clave_articulo = $_GET['clave_articulo'];
+        $clave_presentacion = $_GET['clave_presentacion'];
+
+        $precio = DB::select("SELECT * FROM dtPresentacion
+            JOIN dtPrecio ON dtPrecio.clavePresentacion = dtPresentacion.clavePresentacion AND dtPrecio.noLista = 1
+            WHERE dtPresentacion.claveArticulo = '$clave_articulo' AND dtPresentacion.clavePresentacion = '$clave_presentacion'");
+
+        echo $precio[0]->precio;
     }
 
     /**

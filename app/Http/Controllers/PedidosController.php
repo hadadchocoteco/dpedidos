@@ -17,6 +17,39 @@ class PedidosController extends Controller
         return view('pedidos.inicio');
     }
 
+    public function cargar_pedido_temporal(){
+        $datos['articulos'] = DB::select("SELECT
+        id,
+        dtArticulosPedidoTemp.claveArticulo,
+        SUM(dtArticulosPedidoTemp.cantidad) AS cantidad,
+        (costo * SUM(dtArticulosPedidoTemp.cantidad)) AS costo,
+        dtArticulos.descripcion
+        FROM dtArticulosPedidoTemp
+        JOIN dtArticulos ON dtArticulos.claveArticulo = dtArticulosPedidoTemp.claveArticulo
+        JOIN dtPresentacion ON dtPresentacion.clavePresentacion = dtArticulosPedidoTemp.clavePresentacion
+        GROUP BY dtArticulosPedidoTemp.clavePresentacion,dtArticulosPedidoTemp.claveArticulo");
+
+        return view('pedidos.pedido_temp');
+    }
+
+    public function guardar_pedido_temporal(){
+        DB::table('dtarticulospedidotemp')
+            ->insert([
+                'claveArticulo' => $_POST['claveArticulo'],
+                'clavePresentacion' => $_POST['clavePresentacion'],
+                'costo' => $_POST['costo'],
+                'cantidad' => $_POST['cantidad'],
+                'iva' => $_POST['iva'],
+                'iepsTipo' => $_POST['ieps'],
+                'iepsMonto' => $_POST['iepsm'],
+                'claveCliente' => $_POST['claveCliente'],
+                'estatus' => 'p',
+                'porcendescto' => $_POST['porcendescto']
+            ]);
+
+        echo 1;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

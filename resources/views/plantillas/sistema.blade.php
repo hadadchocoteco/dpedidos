@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="{{ url('/css/portal.css') }}">
     <title>@yield('titulo')</title>
     <script>
+        var token = document.querySelector('meta[name="csrf-token"]').content;
         var base_url = "{{ url('/') }}";
         var xhr = new XMLHttpRequest();
         var url = '';
@@ -77,5 +79,41 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modal-pedido-temporal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h2>Historial</h2>
+                </div>
+                <div class="modal-body">
+                    <div id="carga-pedido-temporal"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger forma-redonda shadow" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function cargar_pedido_temporal(){
+            let carga_pedido_temporal = document.getElementById('carga-pedido-temporal');
+            let url = base_url+'/pedidos/consulta/temporal';
+
+            xhr.onprogress = function(){
+                carga_pedido_temporal.innerHTML = 'cargando';
+            }
+            xhr.onload = function(){
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    carga_pedido_temporal.innerHTML = this.response;
+                }
+            };
+            xhr.onerror = function(){
+                carga_pedido_temporal.innerHTML = 'Error al cargar pedido';
+            }
+            xhr.open('GET',url,true);
+            xhr.send();
+        }
+    </script>
 </body>
 </html>
